@@ -1,0 +1,17 @@
+.buttons {
+  display       : flex;
+  flex-direction: column;
+
+  button {
+    margin-top: 16px;
+  }
+}
+
+.question {
+  display        : flex;
+  justify-content: center;
+
+  h2 {
+    text-align: center;
+  }
+}

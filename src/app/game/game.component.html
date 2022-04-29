@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+  <mat-card-content class="question">
+    <h2>
+      {{questions[questionNumber].question}}
+    </h2>
+  </mat-card-content>
+  <mat-card-actions class="buttons">
+    <button mat-button (click)="checkAnswer(questions[questionNumber].a)">{{questions[questionNumber].a}}</button>
+    <button mat-button (click)=" checkAnswer(questions[questionNumber].b)">{{questions[questionNumber].b}}</button>
+    <button mat-button (click)="checkAnswer(questions[questionNumber].c)">{{questions[questionNumber].c}}</button>
+    <button mat-button (click)="checkAnswer(questions[questionNumber].d)">{{questions[questionNumber].d}}</button>
+
+  </mat-card-actions>
+</mat-card>
+
+{{message}}
+<br>
+<button mat-button (click)="next()">Next Question</button>
+<br>
+{{questionNumber}}

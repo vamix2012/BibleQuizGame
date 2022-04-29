@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "quizgame-ddf16": {
+      "hosting": {
+        "BibleQuizGame": [
+          "bibliatrivia"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "quizgame-ddf16"
+  }
+}
