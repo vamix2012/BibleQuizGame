@@ -1,14 +1,21 @@
 {
   "targets": {
-    "quizgame-ddf16": {
+    "ring-of-fire-320dc": {
       "hosting": {
-        "BibleQuizGame": [
-          "bibliatrivia"
+        "ringoffire": [
+          "ring-of-fire-320dc"
+        ]
+      }
+    },
+    "bibliatrivia-eb6a9": {
+      "hosting": {
+        "ringoffire": [
+          "bibliatrivia-eb6a9"
         ]
       }
     }
   },
   "projects": {
-    "default": "quizgame-ddf16"
+    "default": "ring-of-fire-320dc"
   }
 }

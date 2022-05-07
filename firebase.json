@@ -1,30 +1,18 @@
 {
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "hosting": [
     {
-      "target": "BibleQuizGame",
-      "public": "dist/bible-quiz-game",
+      "public": "dist/ringoffire",
       "ignore": [
-        "**/.*"
-      ],
-      "headers": [
-        {
-          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "public,max-age=31536000,immutable"
-            }
-          ]
-        },
-        {
-          "source": "/@(ngsw-worker.js|ngsw.json)",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "no-cache"
-            }
-          ]
-        }
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
       ],
       "rewrites": [
         {
@@ -34,8 +22,8 @@
       ]
     },
     {
-      "target": "BibleQuizGame",
-      "public": "dist/bible-quiz-game",
+      "target": "ringoffire",
+      "public": "dist/ringoffire",
       "ignore": [
         "**/.*"
       ],
@@ -46,15 +34,6 @@
             {
               "key": "Cache-Control",
               "value": "public,max-age=31536000,immutable"
-            }
-          ]
-        },
-        {
-          "source": "/@(ngsw-worker.js|ngsw.json)",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "no-cache"
             }
           ]
         }
@@ -66,5 +45,8 @@
         }
       ]
     }
-  ]
+  ],
+  "storage": {
+    "rules": "storage.rules"
+  }
 }

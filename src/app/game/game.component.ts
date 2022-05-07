@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import db from 'src/assets/db/db.json';
+import { Game } from 'src/models/game';
+import { MatDialog } from '@angular/material/dialog';
+import { AddPlayerDialogComponent } from '../add-player-dialog/add-player-dialog.component';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
+import db from 'src/assets/db.json';
 
 @Component({
   selector: 'app-game',
@@ -7,35 +12,105 @@ import db from 'src/assets/db/db.json';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  questions: any = '';
-  questionNumber = 0;
-  message = 'abcd';
+  game: Game;
+  gameId: string;
+  questions: any;
+  gameOver = false;
+  playerName: string = '';
+  currentQ: any = '213219378';
 
-  constructor() {
+  constructor(
+    private route: ActivatedRoute,
+    private firestore: AngularFirestore,
+    public dialog: MatDialog
+  ) {
     this.questions = db;
   }
 
   ngOnInit(): void {
     this.shuffle(this.questions);
+    this.currentQ = this.questions.pop();
+    this.playerName = JSON.parse(localStorage.getItem('playerName'));
+    this.currentQ = this.questions.pop();
+    this.newGame();
+    this.route.params.subscribe((params) => {
+      this.gameId = params.id;
+      this.firestore
+        .collection('Games')
+        .doc(this.gameId)
+        .valueChanges()
+        .subscribe((game: any) => {
+          this.game.currentPlayer = game.currentPlayer;
+          this.game.currentQuestion = game.currentQuestion;
+          this.game.playerNames = game.playerNames;
+        });
+    });
   }
 
-  checkAnswer(ans: any) {
-    if (
-      ans.toLocaleLowerCase() ==
-      this.questions[this.questionNumber].corect.toLocaleLowerCase()
+  newGame() {
+    this.game = new Game();
+  }
+
+  // editPlayer(playerId: number) {
+  //   const dialogRef = this.dialog.open(EditPlayerComponent);
+  //   dialogRef.afterClosed().subscribe((change: string) => {
+  //     if (change == 'DELETE') {
+  //       this.game.players.splice(playerId, 1);
+  //       this.game.playerImages.splice(playerId, 1);
+  //     } else if (change) {
+  //       this.game.playerImages[playerId] = change;
+  //     }
+  //     this.saveGame();
+  //   });
+  // }
+
+  takeCard() {
+    if (this.questions.length == 0) {
+      this.gameOver = true;
+    } else if (
+      this.game.playerNames.length > 0 &&
+      this.playerName == this.game.playerNames[this.game.currentPlayer]
     ) {
-      this.message = 'Corect';
-      this.questionNumber++;
-    } else {
-      this.message =
-        'Incorect, Raspuns corect -' +
-        this.questions[this.questionNumber].corect +
-        '-';
+      //   this.game.currentCard = this.game.stack.pop();
+      //   this.game.pickCardAnimation = true;
+      //   this.game.currentPlayer++;
+      //   this.game.currentPlayer =
+      //     this.game.currentPlayer % this.game.players.length;
+      //   this.saveGame();
+      //   setTimeout(() => {
+      //     this.game.playedCards.push(this.game.currentCard);
+      //     this.game.pickCardAnimation = false;
+      //     this.saveGame();
+      //   }, 1500);
+      // } else if (this.game.players.length < 1) {
+      //   this.openDialog();
+      // } else if (this.game.stack.length < 1) {
+      //   this.newGame();
     }
   }
 
-  next() {
-    this.questionNumber++;
+  openDialog(): void {
+    // if (!this.game.playerNames.includes(this.playerName)) {
+    const dialogRef = this.dialog.open(AddPlayerDialogComponent);
+
+    dialogRef.afterClosed().subscribe((name: string) => {
+      if (name && name.length > 0) {
+        this.playerName = name;
+        console.log(name);
+        localStorage.setItem('playerName', JSON.stringify(name));
+        this.game.playerNames.push(name);
+        this.game.playerPoints.push(0);
+        this.saveGame();
+      }
+    });
+    // }
+  }
+
+  saveGame() {
+    this.firestore
+      .collection('Games')
+      .doc(this.gameId)
+      .update(this.game.toJson());
   }
 
   shuffle(array: string[]) {

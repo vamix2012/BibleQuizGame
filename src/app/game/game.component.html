@@ -1,20 +1,17 @@
-<mat-card class="example-card">
-  <mat-card-content class="question">
-    <h2>
-      {{questions[questionNumber].question}}
-    </h2>
-  </mat-card-content>
-  <mat-card-actions class="buttons">
-    <button mat-button (click)="checkAnswer(questions[questionNumber].a)">{{questions[questionNumber].a}}</button>
-    <button mat-button (click)=" checkAnswer(questions[questionNumber].b)">{{questions[questionNumber].b}}</button>
-    <button mat-button (click)="checkAnswer(questions[questionNumber].c)">{{questions[questionNumber].c}}</button>
-    <button mat-button (click)="checkAnswer(questions[questionNumber].d)">{{questions[questionNumber].d}}</button>
+<!-- <app-player (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;" [name]="player"
+  [ngStyle]="{'top.px':200 + (i * 80)}" [playerActive]="i == game.currentPlayer" [image]="game.playerImages[i]"
+  class="playerPosition hide-mobile"></app-player> -->
 
-  </mat-card-actions>
-</mat-card>
+<!-- <app-player-mobile (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;" [name]="player"
+  [ngStyle]="{'top.px':16 + (i * 40)}" [playerActive]="i == game.currentPlayer" [image]="game.playerImages[i]"
+  class="playerPosition hide-desktop"></app-player-mobile> -->
 
-{{message}}
-<br>
-<button mat-button (click)="next()">Next Question</button>
-<br>
-{{questionNumber}}
+<div *ngIf="gameOver" class="gameOver">
+  <h1 style="font-family: 'Yusei Magic', sans-serif;">Game Over!</h1>
+  <h2 style="font-family: 'Yusei Magic', sans-serif;" routerLink="/">Go to start screen</h2>
+</div>
+<div *ngIf="!gameOver" class="field">
+  <button *ngIf="!gameOver && !this.game.playerNames.includes(this.playerName)" mat-fab color="primary"
+    (click)="openDialog()" class="btn-add">
+    <mat-icon>add</mat-icon>
+  </button>
