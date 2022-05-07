@@ -11,6 +11,12 @@
   <h2 style="font-family: 'Yusei Magic', sans-serif;" routerLink="/">Go to start screen</h2>
 </div>
 <div *ngIf="!gameOver" class="field">
+  <!-- <h1>{{game.questions.question}}</h1>
+  <h2>{{game.a}}</h2>
+  <h2>{{currentQ.b}}</h2>
+  <h2>{{currentQ.c}}</h2>
+  <h2>{{currentQ.d}}</h2>
+  <h2>Puncte: {{currentQ.points}}</h2> -->
   <button *ngIf="!gameOver && !this.game.playerNames.includes(this.playerName)" mat-fab color="primary"
     (click)="openDialog()" class="btn-add">
     <mat-icon>add</mat-icon>
