@@ -2,7 +2,7 @@ export class Game {
   public playerNames: string[] = [];
   public playerPoints: number[] = [];
   public currentPlayer: number = 0;
-  public currentQuestion: string = '';
+  public currentQuestion: any = '';
   public questions: any[] = [];
 
   public toJson() {

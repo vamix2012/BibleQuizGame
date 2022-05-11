@@ -35,6 +35,7 @@ export class GameComponent implements OnInit {
           this.game.currentPlayer = game.currentPlayer;
           this.game.currentQuestion = game.currentQuestion;
           this.game.playerNames = game.playerNames;
+          this.game.questions = game.questions;
         });
     });
   }

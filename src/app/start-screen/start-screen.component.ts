@@ -15,12 +15,13 @@ export class StartScreenComponent implements OnInit {
     this.questions = db;
   }
 
-  ngOnInit(): void {
-    this.questions.shuffle();
-  }
+  ngOnInit(): void {}
 
   newGame() {
     let game = new Game();
+    this.shuffle(this.questions);
+    game.questions = this.questions;
+    game.currentQuestion = game.questions.pop();
     this.firestore
       .collection('Games')
       .add(game.toJson())

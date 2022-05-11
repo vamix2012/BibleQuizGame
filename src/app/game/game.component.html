@@ -11,13 +11,25 @@
   <h2 style="font-family: 'Yusei Magic', sans-serif;" routerLink="/">Go to start screen</h2>
 </div>
 <div *ngIf="!gameOver" class="field">
-  <!-- <h1>{{game.questions.question}}</h1>
-  <h2>{{game.a}}</h2>
-  <h2>{{currentQ.b}}</h2>
-  <h2>{{currentQ.c}}</h2>
-  <h2>{{currentQ.d}}</h2>
-  <h2>Puncte: {{currentQ.points}}</h2> -->
+
+  <mat-card class="questionWrap">
+    <mat-card-title class="question">{{game.currentQuestion.question}}</mat-card-title>
+
+    <mat-card-subtitle>Puncte: {{game.currentQuestion.points}}</mat-card-subtitle>
+  </mat-card>
+
+  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.a}}</button>
+  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.b}}</button>
+  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.c}}</button>
+  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.d}}</button>
   <button *ngIf="!gameOver && !this.game.playerNames.includes(this.playerName)" mat-fab color="primary"
     (click)="openDialog()" class="btn-add">
     <mat-icon>add</mat-icon>
   </button>
+
+  <div class="mobileAns">
+    <a class="myButton">{{game.currentQuestion.a}}</a>
+    <a class="myButton">{{game.currentQuestion.b}}</a>
+    <a class="myButton">{{game.currentQuestion.c}}</a>
+    <a class="myButton">{{game.currentQuestion.d}}</a>
+  </div>
