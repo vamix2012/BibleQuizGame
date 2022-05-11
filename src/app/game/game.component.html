@@ -18,18 +18,18 @@
     <mat-card-subtitle>Puncte: {{game.currentQuestion.points}}</mat-card-subtitle>
   </mat-card>
 
-  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.a}}</button>
-  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.b}}</button>
-  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.c}}</button>
-  <button class="ans" mat-raised-button color="primary">{{game.currentQuestion.d}}</button>
+  <button class="ans" mat-raised-button  color="primary">{{game.currentQuestion.a}}</button>
+  <button class="ans" mat-raised-button  color="primary">{{game.currentQuestion.b}}</button>
+  <button class="ans" mat-raised-button  color="primary">{{game.currentQuestion.c}}</button>
+  <button class="ans" mat-raised-button  color="primary">{{game.currentQuestion.d}}</button>
   <button *ngIf="!gameOver && !this.game.playerNames.includes(this.playerName)" mat-fab color="primary"
     (click)="openDialog()" class="btn-add">
     <mat-icon>add</mat-icon>
   </button>
 
   <div class="mobileAns">
-    <a class="myButton">{{game.currentQuestion.a}}</a>
-    <a class="myButton">{{game.currentQuestion.b}}</a>
-    <a class="myButton">{{game.currentQuestion.c}}</a>
-    <a class="myButton">{{game.currentQuestion.d}}</a>
+    <a (click)="checkAnswer(game.currentQuestion.a)" class="myButton">{{game.currentQuestion.a}}</a>
+    <a (click)="checkAnswer(game.currentQuestion.b)" class="myButton">{{game.currentQuestion.b}}</a>
+    <a (click)="checkAnswer(game.currentQuestion.c)" class="myButton">{{game.currentQuestion.c}}</a>
+    <a (click)="checkAnswer(game.currentQuestion.d)" class="myButton">{{game.currentQuestion.d}}</a>
   </div>

@@ -44,18 +44,17 @@ export class GameComponent implements OnInit {
     this.game = new Game();
   }
 
-  // editPlayer(playerId: number) {
-  //   const dialogRef = this.dialog.open(EditPlayerComponent);
-  //   dialogRef.afterClosed().subscribe((change: string) => {
-  //     if (change == 'DELETE') {
-  //       this.game.players.splice(playerId, 1);
-  //       this.game.playerImages.splice(playerId, 1);
-  //     } else if (change) {
-  //       this.game.playerImages[playerId] = change;
-  //     }
-  //     this.saveGame();
-  //   });
-  // }
+checkAnswer(e: any){
+
+  if(e.toLocaleLowerCase() == this.game.currentQuestion.corect.toLocaleLowerCase()) 
+  {
+    console.log("Corect")
+}
+  else 
+  {
+    console.log("Fals")
+  }
+}
 
   takeCard() {
     // if (this.questions.length == 0) {
